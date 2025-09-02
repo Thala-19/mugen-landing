@@ -56,10 +56,17 @@ export async function POST(req: Request) {
       position: count ?? null,
     });
 
-  } catch (err: any) {
-    console.error("Unexpected server error:", err);
+  } catch (err) {
+    if (err instanceof Error) {
+      console.error("Unexpected server error:", err);
+      return NextResponse.json(
+        { error: `Unexpected server error: ${err.message}` },
+        { status: 500 }
+      );
+    }
+    console.error("Unexpected server error (non-Error):", err);
     return NextResponse.json(
-      { error: `Unexpected server error: ${err.message}` },
+      { error: "Unexpected server error" },
       { status: 500 }
     );
   }

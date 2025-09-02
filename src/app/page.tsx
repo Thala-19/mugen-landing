@@ -2,7 +2,7 @@
 
 import { Button } from "./components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+// import { ArrowRight } from "lucide-react";
 import SignupForm from "./components/signup";
 import Image from "next/image";
 import snippet from "./snippet.png";

@@ -93,7 +93,9 @@ export default function SignupForm() {
 
       {status === "error" && (
         <p className="text-red-600 mt-2 sm:mt-0">
-          Something went wrong. Please try again.
+          {errorMessage
+            ? errorMessage
+            : "Something went wrong. Please try again."}
         </p>
       )}
     </form>
