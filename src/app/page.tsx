@@ -4,6 +4,8 @@ import { Button } from "./components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import SignupForm from "./components/signup";
+import Image from "next/image";
+import snippet from "./snippet.png";
 
 export default function LandingPage() {
   return (
@@ -79,9 +81,12 @@ export default function LandingPage() {
           <div className="absolute bottom-20 right-20 w-40 h-40 bg-pink-400 rounded-full opacity-70 blur-2xl"></div>
           <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-gradient-to-tr from-yellow-200 to-pink-500 rotate-12 shadow-2xl"></div> */}
         </section>
+      
+      <Image src={snippet} alt="Example" className="mx-auto rounded-lg shadow-lg h-auto w-full max-w-xl" />
 
       {/* Features Section */}
       <div id="features" className="relative">
+        
         <svg
           className="absolute inset-0 w-full h-full pointer-events-none"
           xmlns="http://www.w3.org/2000/svg"

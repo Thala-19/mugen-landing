@@ -9,6 +9,7 @@ export default function SignupForm() {
     "idle" | "loading" | "success" | "duplicate" | "error"
   >("idle");
   const [position, setPosition] = useState<number | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,6 +22,7 @@ export default function SignupForm() {
     }
 
     setStatus("loading");
+    setErrorMessage(null);
 
     try {
       const res = await fetch("/api/signup", {
@@ -46,6 +48,11 @@ export default function SignupForm() {
     } catch (err) {
       console.error(err);
       setStatus("error");
+      if (err instanceof Error) {
+        setErrorMessage(err.message);
+      } else {
+        setErrorMessage("An unexpected error occurred");
+      }
     }
   };
 
