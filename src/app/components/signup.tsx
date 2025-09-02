@@ -12,6 +12,13 @@ export default function SignupForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setStatus("error");
+      return;
+    }
+        
     setStatus("loading");
 
     try {
@@ -20,6 +27,7 @@ export default function SignupForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
+
 
       if (!res.ok) throw new Error("Failed to sign up");
 

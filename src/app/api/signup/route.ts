@@ -11,14 +11,17 @@ export async function POST(req: Request) {
   try {
     const { email } = await req.json();
 
-    if (!email || !email.includes("@")) {
-      return NextResponse.json({ error: "Invalid email" }, { status: 400 });
+    // Basic email format validation
+    if (!email || typeof email !== "string") {
+      return NextResponse.json({ error: "Email is required" }, { status: 400 });
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      return NextResponse.json({ error: "Invalid email format" }, { status: 400 });
     }
 
     // Try inserting the email
-    const { error } = await supabase
-      .from("signups")
-      .insert([{ email }]);
+    const { error } = await supabase.from("signups").insert([{ email }]);
 
     let duplicate = false;
     if (error) {
@@ -30,6 +33,7 @@ export async function POST(req: Request) {
       }
     }
 
+    
     // Count rows for position
     const { count, error: countError } = await supabase
       .from("signups")
